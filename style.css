@@ -1,0 +1,42 @@
+ .modal{
+     position: absolute;
+     width: 100%;
+     height: 100%;
+     left: 0;
+     top: 0;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+ .modal:before{
+     opacity: 0.8;
+     background: burlywood;
+    content: '';
+     position: absolute;
+     width: 100%;
+     height: 100%;
+ }
+ .modal .close{
+     display: block;
+     position: absolute;
+     cursor: pointer;
+     right: 25px;
+     top: -25px;
+ }
+ .modal img.big{
+     z-index: 3;
+     opacity: 1;
+ }
+ .container{
+     position: relative;
+     display: flex;
+     gap: 50px;
+ }
+ .button{
+     cursor: pointer;
+ }
+ /* .controlForm{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+ } */

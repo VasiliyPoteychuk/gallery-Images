@@ -1,0 +1,9 @@
+.totalLIst{
+  display: flex;
+}
+li{
+  list-style: none;
+}
+p{
+  margin: 0;
+}
