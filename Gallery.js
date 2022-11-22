@@ -9,18 +9,28 @@ export default function Gallery()
     const [quantityImages, setQuantityImages] = useState(10)
     const [popularImage, setPopularImage] = useState('latest')
     const [sizeImage, setSizeImage] = useState('thumb')
+    const [search, setSearch] = useState('')
 
     useEffect(()=>{
+        let url = `https://api.unsplash.com/photos?page=${selectedPage}&per_page=${quantityImages}&order_by=${popularImage}`
+        if(search){
+            url = `https://api.unsplash.com/search/photos?page=${selectedPage}&per_page=${quantityImages}&order_by=${popularImage}&query=${search}`
+        }
         (async ()=>{
-            const response = await fetch(`https://api.unsplash.com/photos?page=${selectedPage}&per_page=${quantityImages}&order_by=${popularImage}&query=office`, {
+            const response = await fetch(url, {
                 headers: {
                     'Authorization' : 'Client-ID t5NOAdtrJsUVbfNVyZzWq4gNWiddhR1jBriDhohqgjE',
                 },
             })
             const json = await  response.json();
-             setPhotos(json)
+            if(search){
+                setPhotos(json.results)
+            }else{
+                setPhotos(json)
+            }
+             
         })()
-    }, [ quantityImages, selectedPage, popularImage])
+    }, [ quantityImages, selectedPage, popularImage, search ])
 
 
     function updateSelected(index){
@@ -61,6 +71,7 @@ export default function Gallery()
                     <option value='small'>400</option>
                     <option value='regular'>1080</option>
                 </select>
+            <input type='search' onChange={(e)=> setSearch(e.target.value)}></input>
         </form>
 
         {photos.map(photo => <img
